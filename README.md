@@ -42,6 +42,7 @@ O modelo é disponibilizado via API REST usando FastAPI.
   "hora_partida_prevista": 14
 }
 
+```
 
 Exemplo de saída
 
