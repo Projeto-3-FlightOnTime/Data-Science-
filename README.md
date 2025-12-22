@@ -44,8 +44,8 @@ O modelo é disponibilizado via API REST usando FastAPI.
 
 ```
 
-```Exemplo de saída
-
+### Exemplo de saída
+```
 {
   "atraso_previsto": 1,
   "probabilidade_atraso": 0.73,
@@ -53,19 +53,20 @@ O modelo é disponibilizado via API REST usando FastAPI.
 }
 ```
 
-```🚀 Como executar
-
+### 🚀 Como executar
+```
 pip install -r requirements.txt
 uvicorn app:app --reload
 ```
 
 
-```Acesse:
+### Acesse:
+```
 http://127.0.0.1:8000/docs
 ```
 
 
-✅ 5️⃣ Simulação de execução da API
+### ✅ 5️⃣ Simulação de execução da API
 
 ### ▶️ Subir a API
 ```bash
