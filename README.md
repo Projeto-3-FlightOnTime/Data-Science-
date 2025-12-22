@@ -70,7 +70,9 @@ http://127.0.0.1:8000/docs
 
 # ✅ 5️⃣ Simulação de execução da API
 
+
 ### ▶️ Subir a API
+
 ```bash
 uvicorn app:app --reload
 
@@ -78,6 +80,7 @@ uvicorn app:app --reload
 
 
 🌐 Swagger
+
 Abra no navegador:
 
 ```
