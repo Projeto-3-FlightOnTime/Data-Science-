@@ -45,7 +45,7 @@ O modelo é disponibilizado via API REST usando FastAPI.
 ```
 
 ### Exemplo de saída
-```
+```json
 {
   "atraso_previsto": 1,
   "probabilidade_atraso": 0.73,
