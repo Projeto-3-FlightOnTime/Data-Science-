@@ -44,49 +44,47 @@ O modelo é disponibilizado via API REST usando FastAPI.
 
 ```
 
-Exemplo de saída
+```Exemplo de saída
 
 {
   "atraso_previsto": 1,
   "probabilidade_atraso": 0.73,
   "threshold_utilizado": 0.4
 }
+```
 
-=================================================================
-
-🚀 Como executar
+```🚀 Como executar
 
 pip install -r requirements.txt
 uvicorn app:app --reload
+```
 
-=================================================================
 
-Acesse:
+```Acesse:
 http://127.0.0.1:8000/docs
+```
 
 
----
-
-# ✅ 5️⃣ Simulação de execução da API
+✅ 5️⃣ Simulação de execução da API
 
 ### ▶️ Subir a API
 ```bash
 uvicorn app:app --reload
+```
 
 
-=================================================================
 
 🌐 Swagger
 
+```
 Abra no navegador:
 
 http://127.0.0.1:8000/docs
-
-
-=================================================================
+```
 
 🔁 Teste via curl
 
+```
 curl -X POST "http://127.0.0.1:8000/predict" \
 -H "Content-Type: application/json" \
 -d '{
@@ -99,6 +97,5 @@ curl -X POST "http://127.0.0.1:8000/predict" \
   "periodo_dia": "Tarde",
   "hora_partida_prevista": 14
 }'
-
-
+```
 
