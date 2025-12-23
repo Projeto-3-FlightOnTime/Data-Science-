@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
-from schemas.request import FlightRequest
+from schemas.request import FligthRequest
 from schemas.response import PredictionResponse
-from utils.preprocessing import preprocess_request
 
 import joblib
 import pandas as pd
@@ -11,20 +10,8 @@ app = FastAPI(
     description="ML microservice to predict flight delays",
 )
 
-# ============================================================
-# CARREGAMENTO DO MODELO
-# ============================================================
-# TODO (Data Science):
-# 1. Treinar o modelo final (ex: RandomForest)
-# 2. Criar um pipeline com preprocessing + modelo
-# 3. Salvar o pipeline completo em um arquivo .pkl
-# 4. Atualizar o caminho abaixo para o arquivo correto
-#
-# Exemplo esperado:
-# model = joblib.load("model/pipeline.pkl")
-# ============================================================
 try:
-    model = joblib.load("CAMINHO_DO_MODELO_AQUI")
+    model = joblib.load("model/flight_delay_model.pkl")
 except Exception as e:
     raise RuntimeError(f"Error loading model: {e}")
 
@@ -33,7 +20,7 @@ except Exception as e:
 # ENDPOINT DE PREVISÃO
 # ============================================================
 @app.post("/predict", response_model=PredictionResponse)
-def predict(request: FlightRequest):
+def predict(request: FligthRequest):
     """
     Endpoint responsável por:
     - Receber os dados do voo (validados pelo schema)
@@ -43,50 +30,28 @@ def predict(request: FlightRequest):
     """
 
     try:
-        # ----------------------------------------------------
-        # PREPARAÇÃO DOS DADOS
-        # ----------------------------------------------------
-        # Convertendo o objeto Pydantic para dict
-        # by_alias=True garante compatibilidade com o JSON do backend Java
+        
         data = request.model_dump(by_alias=True)
 
-        # Envio dos dados crus para o preprocessing
-        # O preprocessing será responsável por:
-        # - Ajustar nomes de colunas
-        # - Criar features derivadas
-        # - Garantir o formato esperado pelo modelo
-        df = preprocess_request(data)
+        data_hora = pd.to_datetime(data["data_hora_partida"])
 
-        # ----------------------------------------------------
-        # REALIZAÇÃO DA PREVISÃO
-        # ----------------------------------------------------
-        # TODO (Data Science):
-        # - Utilizar model.predict(df)
-        # - Utilizar model.predict_proba(df)
-        # - Definir qual classe representa atraso (ex: 1)
-        #
-        # Exemplo futuro:
-        # prediction = model.predict(df)[0]
-        # probability = model.predict_proba(df)[0][1]
+        df = pd.DataFrame([{
+            "sigla_icao_empresa_aerea": data["cod_companhia"],
+            "sigla_icao_aeroporto_origem": data["cod_aeroporto_origem"],
+            "sigla_icao_aeroporto_destino": data["cod_aeroporto_destino"],
+            "hora_partida_prevista": data_hora.hour,
+            "mes": data_hora.month,
+            "dia_semana": data_hora.weekday()
+        }])
 
-        # ----------------------------------------------------
-        # CONVERSÃO DA CLASSE PARA TEXTO
-        # ----------------------------------------------------
-        # TODO (Backend + DS):
-        # - Mapear:
-        #   0 -> "PONTUAL"
-        #   1 -> "ATRASADO"
-        #
-        # Exemplo futuro:
-        # status = "ATRASADO" if prediction == 1 else "PONTUAL"
+        prediction = model.predict(df)[0]
+        probability = model.predict_proba(df)[0][1]
 
-        # ----------------------------------------------------
-        # RESPOSTA DA API
-        # ----------------------------------------------------
+        status = "ATRASADO" if prediction == 1 else "PONTUAL"
+
         return PredictionResponse(
-            # TODO:
-            # previsao=status,
-            # probabilidade=float(probability)
+            status_predicao=status,
+            probabilidade=float(probability)
         )
 
     except Exception as e:
