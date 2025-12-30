@@ -11,7 +11,7 @@ app = FastAPI(
 )
 
 try:
-    model = joblib.load("model/flight_delay_model.pkl")
+    model = joblib.load("model/fligth_delay_model_v3.pkl")
 except Exception as e:
     raise RuntimeError(f"Error loading model: {e}")
 
@@ -39,7 +39,7 @@ def predict(request: FligthRequest):
             "sigla_icao_empresa_aerea": data["cod_companhia"],
             "sigla_icao_aeroporto_origem": data["cod_aeroporto_origem"],
             "sigla_icao_aeroporto_destino": data["cod_aeroporto_destino"],
-            "hora_partida_prevista": data_hora.hour,
+            "hora_partida_prevista_num": data_hora.hour,
             "mes": data_hora.month,
             "dia_semana": data_hora.weekday()
         }])
