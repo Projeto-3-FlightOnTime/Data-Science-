@@ -38,4 +38,4 @@ buscando compreender os fatores que influenciam atrasos e preparar os dados para
 ## 6. Saída do Notebook
 - Dataset analisado e compreendido
 - Base preparada conceitualmente para modelagem
-- Diretrizes para engenharia de atributos no 02_Modelo_Preditivo_FlightOnTime_v3.ipynb
+- Diretrizes para engenharia de atributos no 02_Modelo_Preditivo_FlightOnTime_ok3.ipynb
