@@ -11,7 +11,7 @@ app = FastAPI(
 )
 
 try:
-    model = joblib.load("model/flight_delay_model.pkl")
+    model = joblib.load("model/modelo_random_forest_atraso_voos.pkl")
 except Exception as e:
     raise RuntimeError(f"Error loading model: {e}")
 
