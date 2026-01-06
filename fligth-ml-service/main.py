@@ -44,13 +44,9 @@ def predict(request: FligthRequest):
             "dia_semana": data_hora.weekday()
         }])
 
-        prediction = model.predict(df)[0]
         probability = model.predict_proba(df)[0][1]
 
-        status = "ATRASADO" if prediction == 1 else "PONTUAL"
-
         return PredictionResponse(
-            status_predicao=status,
             probabilidade=float(probability)
         )
 
