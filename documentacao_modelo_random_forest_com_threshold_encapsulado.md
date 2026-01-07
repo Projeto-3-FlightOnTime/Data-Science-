@@ -91,7 +91,7 @@ Principais características:
 
 ```
 entrega_modelo/
-├── modelo_rf_atrasos_thr_0_4.pkl
+├── modelo_rf_atrasos_threshold_5.pkl
 └── ml_model/
     ├── __init__.py
     └── threshold_wrapper.py
