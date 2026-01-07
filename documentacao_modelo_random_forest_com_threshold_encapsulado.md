@@ -2,12 +2,11 @@
 
 ## 1. Identificação do Modelo
 
-- **Nome do artefato**: `modelo_rf_atrasos_thr_0_4.pkl`
+- **Nome do artefato**: `modelo_rf_atrasos_threshold_5.pkl`
 - **Algoritmo**: Random Forest Classifier
 - **Tipo de problema**: Classificação binária (atraso vs não atraso)
 - **Versão lógica do modelo**: RF_ATRASOS_V1_THR_0_4
-- **Data de geração**: _(preencher)_
-- **Responsável**: _(preencher)_
+- **Data de geração**: 06/01/2026
 
 ---
 
